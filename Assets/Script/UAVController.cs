@@ -19,12 +19,6 @@ public class UAVController : MonoBehaviour
     [Header("Collision")]
     public Vector3 boxCastHalfExtents = new Vector3(0.5f, 0.2f, 0.5f);
 
-    [Header("Propellers")]
-    public Transform prop1;
-    public Transform prop2;
-    public Transform prop3;
-    public Transform prop4;
-
     public float propellerSpeed = 3000f;
 
     float forwardInput;
@@ -34,12 +28,22 @@ public class UAVController : MonoBehaviour
     Vector3 currentVelocity;
     Animator anim;
 
+    bool rotorReady;
+    float propellerRPM;
+    float rpmTarget = 5000f;
+
     void Start()
     {
         anim = GetComponent<Animator>();
     }
     void Update()
     {
+
+        bool hasInput = forwardInput != 0 || verticalInput != 0 || yawInput != 0;
+        bool isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, 0.5f);
+        bool isFlying = hasInput && !isGrounded;
+        bool wantsToFly = Keyboard.current.fKey.isPressed || forwardInput != 0 || yawInput != 0 || Keyboard.current.wKey.isPressed;
+
         forwardInput = 0f;
         verticalInput = 0f;
         yawInput = 0f;
@@ -51,21 +55,34 @@ public class UAVController : MonoBehaviour
             forwardInput = -1f;
 
         if (Keyboard.current.fKey.isPressed)
-            verticalInput = 1f;
+        {
+            propellerRPM = Mathf.Lerp(propellerRPM, rpmTarget, Time.deltaTime * 2f);
+        }
+        else
+        {
+            propellerRPM = Mathf.Lerp(propellerRPM, 0f, Time.deltaTime * 1.5f);
+        }
+
+        rotorReady = propellerRPM >= rpmTarget * 0.85f;
 
         if (Keyboard.current.xKey.isPressed)
+        {
             verticalInput = -1f;
+        }
+        else if (rotorReady && wantsToFly)
+        {
+            verticalInput = 1f;
+        }
+        else
+        {
+            verticalInput = 0f;
+        }
 
         if (Keyboard.current.aKey.isPressed)
             yawInput = -1f;
 
         if (Keyboard.current.dKey.isPressed)
             yawInput = 1f;
-
-        prop1.Rotate(0, propellerSpeed * Time.deltaTime, 0);
-        prop2.Rotate(0, -propellerSpeed * Time.deltaTime, 0);
-        prop3.Rotate(0, propellerSpeed * Time.deltaTime, 0);
-        prop4.Rotate(0, -propellerSpeed * Time.deltaTime, 0);
 
         float pitch = -forwardInput * tiltAngle;
 
@@ -89,9 +106,10 @@ public class UAVController : MonoBehaviour
             Space.World
         );
 
-        bool isFlying =forwardInput != 0 ||verticalInput != 0 ||yawInput != 0;
 
         anim.SetBool("IsFlying", isFlying);
+        anim.SetBool("IsGround", isGrounded);
+        anim.SetBool("WantToFly", wantsToFly);
     }
 
     void FixedUpdate()
