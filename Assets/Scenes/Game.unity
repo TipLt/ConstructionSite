@@ -82693,7 +82693,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -87529,7 +87529,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -150554,7 +150554,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -208524,7 +208524,7 @@ Transform:
   m_GameObject: {fileID: 1985277483}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 128.3, y: 3.01, z: 9.4}
+  m_LocalPosition: {x: 123.87, y: 1.68, z: 7.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -226065,6 +226065,14 @@ PrefabInstance:
     - target: {fileID: 6994920054905049852, guid: 0a29d733b16932d428e60c9bc4bebf07, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009120901144899748, guid: 0a29d733b16932d428e60c9bc4bebf07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009120901144899748, guid: 0a29d733b16932d428e60c9bc4bebf07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.96
       objectReference: {fileID: 0}
     - target: {fileID: 7009120901144899749, guid: 0a29d733b16932d428e60c9bc4bebf07, type: 3}
       propertyPath: m_StaticEditorFlags
