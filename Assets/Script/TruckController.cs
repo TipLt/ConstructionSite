@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class TruckController : MonoBehaviour
 {
-    [Header("1. Hành Vi Di Chuyển (Movement)")]
+    [Header("1.Di chuyển")]
     public Transform[] waypoints;
     public float moveSpeed = 5f;
     public float turnSpeed = 8f;
     public float stoppingDistance = 0.2f;
 
-    [Header("2. Trạm Dừng (Zones by Waypoint Index)")]
+    [Header("2. Trạm Dừng")]
     public int loadingWaypointIndex = 0;   // Điểm đến để bốc hàng
     public int unloadingWaypointIndex = 2; // Điểm đến để dỡ hàng
 
-    [Header("3. Cài Đặt Hàng Hóa (Cargo Settings)")]
+    [Header("3. Cài Đặt Hàng Hóa")]
     public Transform cargoHold;            // Vị trí thùng xe tải để gắn đồ
     public List<Transform> itemsOnGround;  // Danh sách đồ vật đang nằm ở kho
     public int maxLoadPerTrip = 3;         // Bốc tối đa 3 món mỗi chuyến
     
-    [Header("Cài Đặt Quỹ Đạo Bay (Parabola)")]
+    [Header("Cài Đặt Quỹ Đạo Bay")]
     public float jumpHeight = 2.5f;        // Độ cao của vòng cung
     public float jumpDuration = 0.5f;      // Thời gian bay của mỗi món đồ
     public float delayBetweenItems = 0.3f; // Khựng lại một chút giữa các món
 
-    [Header("4. Cài Đặt Dỡ Hàng (Unload Settings)")]
+    [Header("4. Cài Đặt Dỡ Hàngs")]
     public Transform unloadStartPoint;     // Điểm rớt đồ đầu tiên ở công trường
-    public Vector3 spacingOffset = new Vector3(1.5f, 0, 0); // Khoảng cách giãn đồ (xếp thành hàng ngang)
+    public Vector3 spacingOffset = new Vector3(3f, 0, 0); // Khoảng cách giãn đồ (xếp thành hàng ngang)
 
     // Các biến nội bộ để theo dõi trạng thái
     private List<Transform> loadedItems = new List<Transform>();

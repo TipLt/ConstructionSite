@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PathBuilder : MonoBehaviour
 {
-    [Header("Tùy chỉnh màu cho dễ nhìn")]
+    [Header("Tùy chỉnh màu")]
     public Color lineColor = Color.cyan; // Màu đường kẻ (mặc định xanh lơ)
     public float pointSize = 0.3f; // Kích thước cục tròn
 
